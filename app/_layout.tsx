@@ -1,29 +1,45 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+// In app/_layout.tsx
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Stack } from 'expo-router';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { AuthProvider } from '../context/AuthContext';     
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+    <ThemeProvider>
+      <AuthProvider>
+        <Stack screenOptions={{
+          headerShown: false,
+          animation: 'fade',
+        }}>
+          {/* 
+          */}
+          <Stack.Screen
+            name="(auth)"
+            options={{
+              animation: 'slide_from_right'
+            }}
+          />
+          <Stack.Screen
+            name="(onboarding)"
+            options={{
+              animation: 'slide_from_right'
+            }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{
+              animation: 'fade'
+            }}
+          />
+          {/* */}
+          <Stack.Screen name="course/[id]" options={{ presentation: 'modal' }} />
+          {/* */}
+          <Stack.Screen name="player/[id]" options={{ presentation: 'fullScreenModal' }} />
+          {/* */}
+          <Stack.Screen name="sleep-player/[id]" options={{ presentation: 'fullScreenModal' }} />
+        </Stack>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

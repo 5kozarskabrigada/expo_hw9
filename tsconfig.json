@@ -1,17 +1,25 @@
 {
   "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true,
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
-  },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
+, "hooks/useAuth.ts"  ],
+"compilerOptions": {
+  "strict": true,
+  "paths": {
+    "@/*": [
+      "./*"
+    ]
+  },
+  "types": [
+    "@react-native-community/datetimepicker",
+    "@react-native-community/slider",
+    "expo-navigation-bar"
   ]
+},
+"exclude": [
+  "node_modules"
+]
 }

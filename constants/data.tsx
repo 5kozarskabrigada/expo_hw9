@@ -1,0 +1,155 @@
+export const categories = [
+    { id: 'all', name: 'All', icon: 'apps' as const },
+    { id: 'my', name: 'My', icon: 'heart' as const },
+    { id: 'anxious', name: 'Anxious', icon: 'sad-outline' as const },
+    { id: 'sleep', name: 'Sleep', icon: 'moon' as const },
+    { id: 'kids', name: 'Kids', icon: 'happy-outline' as const },
+];
+export const meditations = [
+    {
+        id: '1',
+        title: 'Daily Calm',
+        duration: '10 min',
+        category: 'All',
+        image: require('../assets/daily-calm.png'),
+        bgImage: require('../assets/focus-player-bg.png'),
+    },
+    {
+        id: '2',
+        title: '7 Days of Calm',
+        duration: '7 Sessions',
+        category: 'All',
+        bgImage: require('../assets/focus-player-bg.png'),
+        image: require('../assets/7-days-calm.png'),
+    },
+    {
+        id: '3',
+        title: 'Anxiety Release',
+        duration: '15 min',
+        category: 'Anxious',
+        bgImage: require('../assets/focus-player-bg.png'),
+        image: require('../assets/anxiety-release.png'),
+    },
+    {
+        id: '4',
+        title: 'Sleep Stories',
+        duration: '20 min',
+        category: 'Sleep',
+        bgImage: require('../assets/focus-player-bg.png'),
+        image: require('../assets/sleep-stories.png'),
+    },
+    {
+        id: '5',
+        title: 'Stress Detox',
+        duration: '12 min',
+        category: 'Anxious',
+        bgImage: require('../assets/focus-player-bg.png'),
+        image: require('../assets/stress-detox.png'),
+    },
+
+];
+
+export const sleepCategories = [
+    { id: 'all', name: 'All', icon: 'apps' as const },
+    { id: 'my', name: 'My', icon: 'heart' as const },
+    { id: 'anxious', name: 'Anxious', icon: 'sad-outline' as const },
+    { id: 'sleep', name: 'Sleep', icon: 'moon' as const },
+    { id: 'kids', name: 'Kids', icon: 'happy-outline' as const },
+];
+
+export const sleepStories = [
+    {
+        id: 'ocean-moon',
+        title: 'The Ocean Moon',
+        subtitle: 'Non-stop 8-hour mixes of our most popular sleep audio',
+        category: 'All',
+        image: require('../assets/ocean-moon-bg.png'),
+        headerImage: require('../assets/ocean-moon-bg.png'),
+        description: "Ease the mind into a restful night's sleep with these deep, ambient tones.",
+        playerImage: require('../assets/images/sleep-player-bg.png'),
+        stats: { favorites: 24234, listening: 34234 },
+        isFeatured: true,
+        related: ['moon-clouds', 'sweet-sleep'],
+    },
+    {
+        id: 'night-island',
+        title: 'Night Island',
+        subtitle: '45 MIN • SLEEP MUSIC',
+        category: 'Sleep',
+        image: require('../assets/night-island.png'),
+        headerImage: require('../assets/night-island.png'),
+        description: "Ease the mind into a restful night's sleep with these deep, ambient tones.",
+        playerImage: require('../assets/images/sleep-player-bg.png'),
+        stats: { favorites: 18876, listening: 41098 },
+        related: ['moon-clouds', 'sweet-sleep'],
+    },
+    {
+        id: 'sweet-sleep',
+        title: 'Sweet Sleep',
+        subtitle: '45 MIN • SLEEP MUSIC',
+        category: 'Sleep',
+        image: require('../assets/sweet-sleep.png'),
+        headerImage: require('../assets/sweet-sleep.png'),
+        description: "Drift off to dreamland with the gentle sounds of the night.",
+                playerImage: require('../assets/images/sleep-player-bg.png'),
+        stats: { favorites: 15432, listening: 29876 },
+        related: ['night-island', 'sweet-sleep'],
+    },
+    {
+        id: 'good-night',
+        title: 'Good Night',
+        subtitle: '30 MIN • STORY',
+        category: 'Kids',
+        image: require('../assets/good-night.png'),
+        headerImage: require('../assets/good-night.png'),
+        description: "Drift off to dreamland with the gentle sounds of the night.",
+        playerImage: require('../assets/images/sleep-player-bg.png'),
+        stats: { favorites: 15432, listening: 29876 },
+        related: ['night-island', 'sweet-sleep'],
+    },
+    {
+        id: 'calm-dreams',
+        title: 'Calm Dreams',
+        subtitle: '60 MIN • SLEEP MUSIC',
+        category: 'Anxious',
+        image: require('../assets/calm-dreams.png'),
+        headerImage: require('../assets/calm-dreams.png'),
+        description: "Drift off to dreamland with the gentle sounds of the night.",
+        playerImage: require('../assets/images/sleep-player-bg.png'),
+        stats: { favorites: 15432, listening: 29876 },
+        related: ['night-island', 'sweet-sleep'],
+    },
+];
+
+export const musicTracks = [
+    {
+        id: 'music-1',
+        title: 'Night Island',
+        artist: 'Sleep Music',
+        duration: '45 min',
+        image: require('../assets/anxiety-release.png'),
+    },
+    {
+        id: 'music-2',
+        title: 'Sweet Sleep',
+        artist: 'Sleep Music',
+        duration: '30 min',
+        image: require('../assets/daily-calm.png'),
+
+    },
+    {
+        id: 'music-3',
+        title: 'Good Night',
+        artist: 'Meditation',
+        duration: '15 min',
+        image: require('../assets/stress-detox.png'),
+    },
+    {
+        id: 'music-4',
+        title: 'Calm Forest',
+        artist: 'Nature Sounds',
+        duration: '60 min',
+        image: require('../assets/sleep-stories.png'),
+
+    },
+];
