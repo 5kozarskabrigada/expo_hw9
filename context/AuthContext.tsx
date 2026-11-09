@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         const checkAuth = async () => {
-            const token = await SecureStore.getItemAsync('auth-token');
+            const token = await tokenStorage.getItemAsync('auth-token');
             if (token) {
                 const { data: { user } } = await supabase.auth.getUser(token);
                 setUser(user);
@@ -44,10 +44,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             async (event, session) => {
                 if (session?.user) {
                     setUser(session.user);
-                    await SecureStore.setItemAsync('auth-token', session.access_token);
+                    await tokenStorage.setItemAsync('auth-token', session.access_token);
                 } else {
                     setUser(null);
-                    await SecureStore.deleteItemAsync('auth-token');
+                    await tokenStorage.deleteItemAsync('auth-token');
                 }
             }
         );
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (error) throw error;
         if (data.session) {
             setUser(data.user);
-            await SecureStore.setItemAsync('auth-token', data.session.access_token);
+            await tokenStorage.setItemAsync('auth-token', data.session.access_token);
         }
     };
 
@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (error) throw error;
         if (data.session) {
             setUser(data.user);
-            await SecureStore.setItemAsync('auth-token', data.session.access_token);
+            await tokenStorage.setItemAsync('auth-token', data.session.access_token);
         }
     };
 
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const { error } = await supabase.auth.signOut();
         if (error) throw error;
         setUser(null);
-        await SecureStore.deleteItemAsync('auth-token');
+        await tokenStorage.deleteItemAsync('auth-token');
     };
 
     return (
