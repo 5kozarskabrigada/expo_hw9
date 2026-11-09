@@ -4,8 +4,7 @@ import { useTheme } from '@/components/ThemeProvider';
 import React, { useState, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, { useSharedValue, useAnimatedScrollHandler, useDerivedValue, runOnJS } from 'react-native-reanimated';
-
+import Animated, { useAnimatedScrollHandler, runOnJS } from 'react-native-reanimated';
 
 const daysOfWeek = [
     { key: 'SU', value: 'Sunday' }, { key: 'M', value: 'Monday' }, { key: 'T', value: 'Tuesday' },
@@ -16,17 +15,17 @@ const ITEM_HEIGHT = 50;
 const VISIBLE_ITEMS = 3;
 
 const TimePickerColumn = ({ data, onValueChange, initialValue }: any) => {
-    const { colors } = useTheme(); 
-    const scrollY = useSharedValue(0);
+    const { colors } = useTheme();
     const flatListRef = useRef<any>(null);
     const initialIndex = data.findIndex((item: any) => item === initialValue);
+    const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
     const handleMomentumEnd = (index: number) => {
+        setSelectedIndex(index);
         onValueChange(data[index]);
     };
 
     const scrollHandler = useAnimatedScrollHandler({
-        onScroll: (event) => { scrollY.value = event.contentOffset.y; },
         onMomentumEnd: (event) => {
             const index = Math.round(event.contentOffset.y / ITEM_HEIGHT);
             runOnJS(handleMomentumEnd)(index);
@@ -37,14 +36,15 @@ const TimePickerColumn = ({ data, onValueChange, initialValue }: any) => {
         <Animated.FlatList
             ref={flatListRef}
             data={['', ...data, '']}
+                extraData={selectedIndex}
+                style={{ height: ITEM_HEIGHT * VISIBLE_ITEMS }}
             renderItem={({ item, index }) => {
-                const derivedIndex = useDerivedValue(() => Math.round(scrollY.value / ITEM_HEIGHT));
-                const isSelected = useDerivedValue(() => derivedIndex.value === index - 1);
+                const isSelected = index - 1 === selectedIndex;
                 const isActive = index > 0 && index <= data.length;
                 return (
                     <View style={styles.itemWrapper}>
                         {isActive && (
-                            <Text style={[styles.itemText, { color: isSelected.value ? colors.text : '#A1A4B2' }]}>
+                                <Text style={[styles.itemText, { color: isSelected ? colors.text : '#A1A4B2' }]}>
                                 {typeof item === 'number' ? String(item).padStart(2, '0') : item}
                             </Text>
                         )}
