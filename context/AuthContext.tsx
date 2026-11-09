@@ -1,7 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 import { Session } from '@supabase/supabase-js';
+
+const tokenStorage = {
+    getItemAsync: (key: string) =>
+        Platform.OS === 'web' ? AsyncStorage.getItem(key) : SecureStore.getItemAsync(key),
+    setItemAsync: (key: string, value: string) =>
+        Platform.OS === 'web' ? AsyncStorage.setItem(key, value) : SecureStore.setItemAsync(key, value),
+    deleteItemAsync: (key: string) =>
+        Platform.OS === 'web' ? AsyncStorage.removeItem(key) : SecureStore.deleteItemAsync(key),
+};
 
 type AuthContextType = {
     user: Session['user'] | null;
